@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  /* Default: Pastel Delight Light Mode */
+  :root {
+    --color-pastel-pink: #FFD6E7;
+    --color-pastel-lavender: #E6DFFF;
+    --color-pastel-mint: #D5F5E3;
+    --color-pastel-blue: #D9EEFF;
+    --color-pastel-peach: #FFE2CC;
+    --color-pastel-yellow: #FFF1B8;
+    --color-main-bg: #FFFAFD;
+    --color-card-bg: #FFFFFF;
+    --color-main-text: #352B48;
+    --color-secondary-text: #777187;
+    --color-border-subtle: #E6DFFF;
+    --color-purple-accent: #9274E8;
+    --color-pink-accent: #F08CB4;
+    --color-success: #31966B;
+    --color-error: #D95370;
+  }
+
+  /* High Contrast Pastel Light */
+  [data-theme="high-contrast"][data-mode="light"] {
+    --color-pastel-pink: #FFB3D4;
+    --color-pastel-lavender: #D2C4FF;
+    --color-pastel-mint: #A8F0C6;
+    --color-pastel-blue: #B3DCFF;
+    --color-pastel-peach: #FFC79E;
+    --color-pastel-yellow: #FFE885;
+    --color-main-bg: #FCF9FE;
+    --color-card-bg: #FFFFFF;
+    --color-main-text: #1E162B;
+    --color-secondary-text: #4F4960;
+    --color-border-subtle: #C4B5FD;
+    --color-purple-accent: #7C5CE0;
+    --color-pink-accent: #E85B93;
+  }
+
+  /* Soft Lavender Focus Light */
+  [data-theme="soft-lavender"][data-mode="light"] {
+    --color-pastel-pink: #F3E8FF;
+    --color-pastel-lavender: #EDE9FE;
+    --color-pastel-mint: #E0F2FE;
+    --color-pastel-blue: #E0E7FF;
+    --color-pastel-peach: #FCE7F3;
+    --color-pastel-yellow: #FEF3C7;
+    --color-main-bg: #FAF8FF;
+    --color-card-bg: #FFFFFF;
+    --color-main-text: #2E2840;
+    --color-secondary-text: #6B6380;
+    --color-border-subtle: #E2D9F8;
+    --color-purple-accent: #8B5CF6;
+    --color-pink-accent: #D946EF;
+  }
+
+  /* Dark Mode: Base */
+  [data-mode="dark"],
+  .dark {
+    --color-main-bg: #151120;
+    --color-card-bg: #1F1930;
+    --color-main-text: #F5F1FD;
+    --color-secondary-text: #A8A1BC;
+    --color-border-subtle: #332A4C;
+    --color-pastel-pink: #3D2232;
+    --color-pastel-lavender: #2B2144;
+    --color-pastel-mint: #1B362A;
+    --color-pastel-blue: #1A2F45;
+    --color-pastel-peach: #3D291F;
+    --color-pastel-yellow: #3D351A;
+    --color-purple-accent: #A78BFA;
+    --color-pink-accent: #F472B6;
+    --color-success: #34D399;
+    --color-error: #F87171;
+  }
+
+  /* High Contrast Pastel Dark */
+  [data-theme="high-contrast"][data-mode="dark"] {
+    --color-main-bg: #0E0B16;
+    --color-card-bg: #1A1429;
+    --color-main-text: #FFFFFF;
+    --color-secondary-text: #C4BDD8;
+    --color-border-subtle: #4C3C73;
+    --color-purple-accent: #C084FC;
+    --color-pink-accent: #FB7185;
+  }
+
+  /* Soft Lavender Focus Dark */
+  [data-theme="soft-lavender"][data-mode="dark"] {
+    --color-main-bg: #120F1D;
+    --color-card-bg: #1C172C;
+    --color-main-text: #F3EEFC;
+    --color-secondary-text: #9E96B5;
+    --color-border-subtle: #2F2646;
+    --color-purple-accent: #B48DF8;
+    --color-pink-accent: #E879F9;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--color-main-bg);
+    color: var(--color-main-text);
+    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* 3D Flashcard flip utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Soft shadows for pastel cards */
+.shadow-soft {
+  box-shadow: 0 4px 20px -2px rgba(53, 43, 72, 0.05), 0 2px 6px -1px rgba(53, 43, 72, 0.03);
+}
+
+.shadow-soft-lg {
+  box-shadow: 0 10px 30px -4px rgba(53, 43, 72, 0.08), 0 4px 10px -2px rgba(53, 43, 72, 0.04);
+}
+
+.shadow-pastel-purple {
+  box-shadow: 0 8px 24px -4px rgba(146, 116, 232, 0.25);
+}
+
+.shadow-pastel-pink {
+  box-shadow: 0 8px 24px -4px rgba(240, 140, 180, 0.25);
+}

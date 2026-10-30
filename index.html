@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quizzy AI — Learn Smarter, One Quiz at a Time</title>
+    <meta name="description" content="AI-powered interactive learning platform for students to generate quizzes, study flashcards, upload PDF notes, and track progress." />
+    <meta property="og:title" content="Quizzy AI — Learn Smarter, One Quiz at a Time" />
+    <meta property="og:description" content="AI-powered interactive learning platform for students to generate quizzes, study flashcards, upload PDF notes, and track progress." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+      (function() {
+        try {
+          const mode = localStorage.getItem('quizzy_color_mode');
+          if (mode === 'dark') {
+            document.documentElement.classList.add('dark');
+            document.documentElement.setAttribute('data-mode', 'dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('data-mode', 'light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="antialiased selection:bg-[#FFD6E7] selection:text-[#352B48]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

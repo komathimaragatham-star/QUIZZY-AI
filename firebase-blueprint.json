@@ -1,0 +1,205 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered student account profile and personal preferences",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Firebase Auth UID" },
+        "fullName": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "primaryEmail": { "type": "string", "format": "email", "maxLength": 150 },
+        "alternativeEmail": { "type": "string", "maxLength": 150 },
+        "phoneNumber": { "type": "string", "minLength": 7, "maxLength": 30 },
+        "username": { "type": "string", "minLength": 3, "maxLength": 40 },
+        "createdAt": { "type": "string", "description": "ISO timestamp of registration" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of last update" },
+        "themePreference": {
+          "type": "string",
+          "enum": ["pastel-delight", "high-contrast", "soft-lavender"]
+        },
+        "colorMode": {
+          "type": "string",
+          "enum": ["light", "dark", "system"]
+        },
+        "notificationPreferences": {
+          "type": "object",
+          "description": "Student notification subscriptions"
+        }
+      },
+      "required": ["id", "fullName", "primaryEmail", "phoneNumber", "username", "createdAt"]
+    },
+    "UsernameReservation": {
+      "title": "UsernameReservation",
+      "description": "Unique username registry index mapping normalized username to UID",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "createdAt"]
+    },
+    "PhoneReservation": {
+      "title": "PhoneReservation",
+      "description": "Unique phone number registry index mapping normalized E.164 phone to UID",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "createdAt"]
+    },
+    "EmailReservation": {
+      "title": "EmailReservation",
+      "description": "Unique email registry index mapping normalized email to UID",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "type": { "type": "string", "enum": ["primary", "alternative"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "type", "createdAt"]
+    },
+    "QuizAttempt": {
+      "title": "QuizAttempt",
+      "description": "Record of a completed student quiz attempt",
+      "type": "object",
+      "properties": {
+        "attemptId": { "type": "string" },
+        "userId": { "type": "string" },
+        "topic": { "type": "string", "maxLength": 150 },
+        "difficulty": { "type": "string", "enum": ["Easy", "Medium", "Hard"] },
+        "questionCount": { "type": "number" },
+        "correctAnswers": { "type": "number" },
+        "totalScore": { "type": "number" },
+        "accuracy": { "type": "number" },
+        "earnedPoints": { "type": "number" },
+        "completionStatus": { "type": "string", "enum": ["completed", "in-progress"] },
+        "startedAt": { "type": "string" },
+        "completedAt": { "type": "string" },
+        "submissionId": { "type": "string" }
+      },
+      "required": ["attemptId", "userId", "topic", "questionCount", "correctAnswers", "accuracy", "submissionId"]
+    },
+    "UserProgress": {
+      "title": "UserProgress",
+      "description": "Aggregated learning stats, streaks, points, and badges for a student",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "totalQuizzesCompleted": { "type": "number" },
+        "totalEarnedPoints": { "type": "number" },
+        "averageAccuracy": { "type": "number" },
+        "currentStreakDays": { "type": "number" },
+        "lastActiveDate": { "type": "string" },
+        "topicMastery": { "type": "object" },
+        "earnedBadgeIds": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "totalQuizzesCompleted", "totalEarnedPoints", "currentStreakDays"]
+    },
+    "LeaderboardEntry": {
+      "title": "LeaderboardEntry",
+      "description": "Public student standing entry for weekly and all-time leaderboards",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "username": { "type": "string", "maxLength": 40 },
+        "points": { "type": "number" },
+        "accuracy": { "type": "number" },
+        "quizzesCompleted": { "type": "number" },
+        "streakDays": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "displayName", "username", "points", "accuracy", "quizzesCompleted"]
+    },
+    "FlashcardItem": {
+      "title": "FlashcardItem",
+      "description": "User flashcards for spaced repetition practice",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "deck": { "type": "string", "maxLength": 80 },
+        "front": { "type": "string", "maxLength": 500 },
+        "back": { "type": "string", "maxLength": 1000 },
+        "hint": { "type": "string", "maxLength": 200 },
+        "difficulty": { "type": "string", "enum": ["Easy", "Medium", "Hard"] },
+        "status": { "type": "string", "enum": ["unreviewed", "known", "needs-practice"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "deck", "front", "back", "createdAt"]
+    },
+    "SavedDocument": {
+      "title": "SavedDocument",
+      "description": "Saved PDF or text study notes document in the student library",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string", "maxLength": 200 },
+        "size": { "type": "number" },
+        "extractedText": { "type": "string" },
+        "summary": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "name", "size", "createdAt"]
+    },
+    "ContestEntry": {
+      "title": "ContestEntry",
+      "description": "Student participation in a weekly contest sprint",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "contestId": { "type": "string" },
+        "score": { "type": "number" },
+        "pointsEarned": { "type": "number" },
+        "completedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "contestId", "score", "pointsEarned", "completedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Individual student profile details and preferences"
+    },
+    "/usernames/{username}": {
+      "schema": "UsernameReservation",
+      "description": "Lookup index guaranteeing unique username selection without exposing PII"
+    },
+    "/phones/{phone}": {
+      "schema": "PhoneReservation",
+      "description": "Lookup index guaranteeing unique phone numbers without exposing PII"
+    },
+    "/emails/{email}": {
+      "schema": "EmailReservation",
+      "description": "Lookup index guaranteeing uniqueness across primary and alternative emails"
+    },
+    "/quiz_attempts/{attemptId}": {
+      "schema": "QuizAttempt",
+      "description": "Individual completed quiz attempt logs"
+    },
+    "/user_progress/{userId}": {
+      "schema": "UserProgress",
+      "description": "Aggregated user statistics, mastery rates, and badges"
+    },
+    "/leaderboard/{userId}": {
+      "schema": "LeaderboardEntry",
+      "description": "Public student points and ranking records"
+    },
+    "/flashcards/{flashcardId}": {
+      "schema": "FlashcardItem",
+      "description": "Student flashcards saved to their learning deck"
+    },
+    "/saved_documents/{docId}": {
+      "schema": "SavedDocument",
+      "description": "User saved study notes and syllabus files"
+    },
+    "/contest_entries/{entryId}": {
+      "schema": "ContestEntry",
+      "description": "Completed contest sprint submissions"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Remix Quizzy AI",
+  "description": "AI-powered interactive learning platform for students to generate quizzes, study flashcards, upload PDF notes, and track progress.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
